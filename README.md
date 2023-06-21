@@ -1,6 +1,8 @@
 # Projeto Bot Discord
 
 Este é um bot Discord desenvolvido em Python para interagir com usuários, realizar buscas no YouTube e fornecer respostas usando uma inteligência artificial.
+
+___
 ![B.O.BOT](/boticon.png)
 
 ## Requisitos
