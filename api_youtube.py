@@ -1,12 +1,12 @@
 from googleapiclient.discovery import build
-import SECRET_KEY
+import SECRET_KEY as SECRET_KEY
 
 
 def search_videos(query):
     youtube = build('youtube', 'v3', developerKey=SECRET_KEY.API_KEY)
 
     request = youtube.search().list(
-        part='snippet', q=query, type='video', maxResults=1
+        part='snippet', q=query, type='video', maxResults=50000
     )
     response = request.execute()
 
