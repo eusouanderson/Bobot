@@ -13,7 +13,7 @@ ENV OLLAMA_HOST=0.0.0.0:11434
 
 WORKDIR /app
 
-COPY pyproject.toml poetry.lock ./
+COPY pyproject.toml poetry.lock README.md ./
 
 RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi --without dev
