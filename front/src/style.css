@@ -1,0 +1,153 @@
+:root {
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+  background: #0b0f1a;
+  color: #e5e7eb;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1f2a44 0%, #0b0f1a 45%, #070a12 100%);
+}
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 24px 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero__badge {
+  width: fit-content;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(79, 70, 229, 0.2);
+  border: 1px solid rgba(79, 70, 229, 0.5);
+  color: #a5b4fc;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.1;
+}
+
+.hero p {
+  max-width: 640px;
+  color: #cbd5f5;
+  font-size: 1.05rem;
+}
+
+.hero__cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.btn {
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn--primary {
+  background: #6366f1;
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.35);
+}
+
+.btn--primary:hover {
+  transform: translateY(-1px);
+}
+
+.btn--ghost {
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  color: #e2e8f0;
+}
+
+.brand {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 32px;
+  align-items: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.55);
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.brand__logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 16px;
+  background: #0f172a;
+  padding: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.card h3 {
+  margin-bottom: 8px;
+  color: #a5b4fc;
+}
+
+.how {
+  display: grid;
+  gap: 16px;
+}
+
+.how ol {
+  display: grid;
+  gap: 12px;
+  margin-left: 20px;
+  color: #cbd5f5;
+}
+
+.cta {
+  text-align: center;
+  padding: 36px;
+  border-radius: 20px;
+  background: rgba(30, 41, 59, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+@media (max-width: 720px) {
+  .brand {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .brand__logo {
+    margin: 0 auto;
+  }
+}

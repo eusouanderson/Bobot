@@ -61,6 +61,16 @@ docker compose up --build -d
 docker compose logs -f
 ~~~
 
+## Front (landing page)
+
+O front fica em `front/` e pode ser publicado na Vercel.
+
+~~~
+cd front
+pnpm install
+pnpm run start
+~~~
+
 ## Como usar
 
 ### Comandos com prefixo (!)
