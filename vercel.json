@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm --prefix front install && pnpm --prefix front run build",
-  "outputDirectory": "front/dist",
-  "installCommand": "pnpm --prefix front install"
+  "buildCommand": "pnpm install && pnpm run build",
+  "outputDirectory": "dist",
+  "installCommand": "pnpm install"
 }
