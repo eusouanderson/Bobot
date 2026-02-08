@@ -41,6 +41,26 @@ poetry install
 poetry run bobot
 ~~~
 
+## Docker Compose
+
+1. Crie o arquivo .env e configure as variáveis:
+
+~~~
+cp .env.example .env
+~~~
+
+2. Suba o bot com Docker Compose:
+
+~~~
+docker compose up --build -d
+~~~
+
+3. Verifique os logs:
+
+~~~
+docker compose logs -f
+~~~
+
 ## Como usar
 
 ### Comandos com prefixo (!)
