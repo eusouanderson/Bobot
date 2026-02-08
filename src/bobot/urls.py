@@ -1,0 +1,8 @@
+URL_PYTHON = "https://docs.python.org/3/"
+URL_JAVASCRIPT = "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript"
+URL_HTML = "https://developer.mozilla.org/pt-BR/docs/Web/HTML"
+URL_CSS = "https://developer.mozilla.org/pt-BR/docs/Web/CSS"
+URL_MONGO = "https://pymongo.readthedocs.io/en/stable/"
+CSHARP = "https://docs.microsoft.com/en-us/dotnet/csharp/"
+C = "https://en.wikipedia.org/wiki/C_(programming_language)"
+GOOGLE = "https://www.google.com/search?q={}"
