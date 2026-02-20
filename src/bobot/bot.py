@@ -16,6 +16,7 @@ from bobot.domain.exceptions import ExternalServiceError, RateLimitError
 from bobot.urls import C, CSHARP, URL_CSS, URL_HTML, URL_JAVASCRIPT, URL_MONGO, URL_PYTHON
 from bobot.utils.logging import configure_logging, get_logger
 from bobot.utils.text import chunk_text
+from bobot.services.quiz import QuizService, QuizQuestion
 
 # Configuração das intenções do bot
 intents = discord.Intents.default()
@@ -29,6 +30,7 @@ logger = get_logger(__name__)
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 llm_service = create_llm_service()
+quiz_service = QuizService(llm_service=llm_service)
 
 
 @bot.event
@@ -94,6 +96,60 @@ async def help_commands(ctx):
         ),
         inline=False,
     )
+    embed.add_field(
+        name="🏆 Quiz Diário",
+        value=(
+            "`!quiz` — desafio diário de programação gerado pela IA\n"
+            "`!responder <opção>` — responde o quiz\n"
+            "`!ranking` — ranking dos melhores participantes"
+        ),
+        inline=False,
+    )
+    await ctx.send(embed=embed)
+
+@bot.command(name="quiz")
+async def quiz_command(ctx):
+    user_id = str(ctx.author.id)
+    quiz = await quiz_service.get_daily_quiz(user_id)
+    if not quiz:
+        await ctx.send("Você já respondeu o quiz de hoje! Volte amanhã.")
+        return
+    embed = discord.Embed(
+        title="🏆 Quiz Diário de Programação",
+        description=quiz.pergunta,
+        color=0xFFD700,
+    )
+    for idx, opcao in enumerate(quiz.opcoes):
+        embed.add_field(name=f"Opção {idx+1}", value=opcao, inline=False)
+    await ctx.send(embed=embed)
+    ctx.bot.quiz_question = quiz  # Armazena temporariamente
+
+@bot.command(name="responder")
+async def responder_command(ctx, opcao: int):
+    user_id = str(ctx.author.id)
+    quiz = getattr(ctx.bot, "quiz_question", None)
+    if not quiz:
+        await ctx.send("Nenhum quiz ativo. Use !quiz para receber o desafio.")
+        return
+    correto = quiz_service.submit_answer(user_id, quiz, opcao-1)
+    if correto:
+        await ctx.send("✅ Resposta correta! Parabéns!")
+    else:
+        await ctx.send(f"❌ Resposta incorreta. A opção correta era {quiz.opcoes[quiz.resposta_correta]}.")
+    del ctx.bot.quiz_question
+
+@bot.command(name="ranking")
+async def ranking_command(ctx):
+    ranking = quiz_service.get_ranking()
+    if not ranking:
+        await ctx.send("Nenhum participante ainda.")
+        return
+    embed = discord.Embed(
+        title="🏆 Ranking Quiz Diário",
+        color=0x00BFFF,
+    )
+    for idx, (user, score) in enumerate(ranking[:10]):
+        embed.add_field(name=f"#{idx+1}", value=f"User: {user} | Pontos: {score}", inline=False)
     await ctx.send(embed=embed)
 
 
